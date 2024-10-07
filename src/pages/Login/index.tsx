@@ -48,6 +48,8 @@ export default function Login() {
             if (response && response.access_token) {
                 localStorage.setItem('access_token', response.access_token);
 
+                const cpf = localStorage.setItem('cpf', data.cpf);
+
                 toast.update(toastId, {
                     render: "Login bem-sucedido!",
                     type: "success",
@@ -59,7 +61,7 @@ export default function Login() {
                 });
 
                 login();
-                navigate('/comeco');
+                navigate('/comeco', { state: { name: cpf } });
             } else {
                 toast.update(toastId, {
                     render: "Erro no login. Tente novamente.",
@@ -79,7 +81,6 @@ export default function Login() {
                     autoClose: 2000,
                 });
             }
-            toast.error("Erro no processo de login");
         } finally {
             setLoading(false);
         }

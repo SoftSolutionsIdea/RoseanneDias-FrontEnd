@@ -5,18 +5,21 @@ import Employess from "../../assets/icons/employees.svg";
 import Money from "../../assets/icons/money.svg";
 import Stock from "../../assets/icons/stock.svg";
 import profileImageUrl from "../../assets/icons/client.svg";
+import { useNavigate, useLocation } from "react-router-dom";
 
-import { useNavigate } from "react-router-dom";
 
 export default function Begininning() {
-    const userName = "Jefferson";
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const cpf = location.state?.cpf || localStorage.getItem('cpf') || "Usuário";
+
     return (
         <PageContainer>
             <ProfileContainer>
                 <ProfileImage src={profileImageUrl} alt="Perfil" />
-                {userName}
+                {cpf}
             </ProfileContainer>
             <ButtonContainer>
                 <Button onClick={() => navigate('/estoque')}>
