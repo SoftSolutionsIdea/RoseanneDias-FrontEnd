@@ -60,3 +60,23 @@ export const Footer = styled.footer`
   justify-content: flex-end;
   align-items: center;
 `
+export const Profile = styled.div`
+  display: flex;
+  width: 77%;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  border: 1px solid white;
+  padding: 15px;
+  font-weight: 800;
+  gap: 30px;
+  margin-top: 285px;
+  margin-left: 25px;
+
+
+  @media (max-width: 768px) {
+    /* position: absolute;
+    bottom: 130px;
+    right: 6px; */
+  }
+`;

@@ -1,6 +1,6 @@
-import { Container, Pages, Header, Button } from "./styles";
+import { Container, Pages, Header, Button, Profile } from "./styles";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSidebar } from "../../context/hooks/useSidebar";
 import close from "../../assets/icons/close.svg"
 import Money from "../../assets/icons/money.svg"
@@ -16,6 +16,9 @@ export default function Sidebar() {
     };
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const cpf = location.state?.cpf || localStorage.getItem('cpf') || "Usuário";
 
     return (
         <Container isCollapsed={isCollapsed}>
@@ -42,6 +45,10 @@ export default function Sidebar() {
                     <span>Cliente</span>
                 </Button>
             </Pages>
+            <Profile>
+                <img src={Client} alt=" " height="25px" />
+                {cpf}
+            </Profile>
         </Container >
     );
 }
