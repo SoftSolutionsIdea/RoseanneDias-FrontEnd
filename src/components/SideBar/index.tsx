@@ -1,4 +1,4 @@
-import { Container, Pages, Header, Button, Profile } from "./styles";
+import { Container, Pages, Header, Button, Profile, Footer } from "./styles";
 
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSidebar } from "../../context/hooks/useSidebar";
@@ -45,10 +45,12 @@ export default function Sidebar() {
                     <span>Cliente</span>
                 </Button>
             </Pages>
-            <Profile>
-                <img src={Client} alt=" " height="25px" />
-                {cpf}
-            </Profile>
+            <Footer>
+                <Profile>
+                    <img src={Client} alt=" " height="25px" />
+                    <span>{cpf}</span>
+                </Profile>
+            </Footer>
         </Container >
     );
 }

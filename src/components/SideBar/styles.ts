@@ -29,7 +29,7 @@ export const Pages = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 250px;
+  height: 30%;
 `
 export const Button = styled.button`
   display: flex;
@@ -59,6 +59,8 @@ export const Footer = styled.footer`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  height: 70%;
+  padding: 0px 0px 20px 0px;
 `
 export const Profile = styled.div`
   display: flex;
@@ -66,17 +68,24 @@ export const Profile = styled.div`
   height: 42px;
   display: flex;
   align-items: center;
-  border: 1px solid white;
+  border-radius: 4px;
+  border: none;
   padding: 15px;
   font-weight: 800;
-  gap: 30px;
-  margin-top: 285px;
-  margin-left: 25px;
+  border: 1px solid white;
+  padding: 20px;
 
+  span {
+    flex-grow: 1;
+    margin-left: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
   @media (max-width: 768px) {
-    /* position: absolute;
-    bottom: 130px;
-    right: 6px; */
+    span {
+      display: none !important;
+    }
   }
-`;
+`
