@@ -1,124 +1,110 @@
 import { Container, ContainerContent, ContainerLeft, ContainerRight } from './styles';
 import ButtonSearch from '../../components/ButtonSearch';
 import Search from '../../components/Search';
-// import { usePopup } from "../../context/PopUpContext";
-// import DressPopup from '../../components/PopUpAdd';
-// import InformationData from "../../components/Dress";
-// import { useState, useEffect } from 'react';
-// import { Dress } from "./dressType";
-// import { toast, ToastContainer } from 'react-toastify';
-// import { deleteVestido } from "../../service/DeletePopUpService";
-// import { fetchVestidos } from "../../service/ListPopUpService";
-// import DressPopupEdit from '../../components/PopUpEdit';
+import { usePopup } from "../../context/PopUpContext";
+import ClientPopup from '../../components/PopUpAddClient';
+import InformationData from "../../components/Client";
+import { useState, useEffect } from 'react';
+import { Client } from "./clientType";
+import { toast, ToastContainer } from 'react-toastify';
+import { fetchClient } from "../../service/Client/ListPopUpClientService";
+import ClientPopupEdit from '../../components/PopUpEditClient';
 
-export default function Client() {
-    // const { togglePopup, isPopupOpen } = usePopup();
-    // const [vestidos, setVestidos] = useState<Dress[]>([]);
-    // const [searchTerm, setSearchTerm] = useState<string>('');
-    // const [selectedVestido, setSelectedVestido] = useState<Dress | null>(null);
+export default function ClientPage() {
+    const { togglePopup, isPopupOpen } = usePopup();
+    const [clients, setClients] = useState<Client[]>([]);
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const [selectedClient, setSelectedClient] = useState<Client | null>(null);
 
-    // const loadVestidos = async () => {
-    //     const token = localStorage.getItem('access_token');
-    //     if (!token) {
-    //         toast.error('Você precisa estar logado para carregar os vestidos.');
-    //         return;
-    //     }
+    const loadClients = async () => {
+        const token = localStorage.getItem('access_token');
+        if (!token) {
+            toast.error('Você precisa estar logado para carregar os clientes.');
+            return;
+        }
 
-    //     try {
-    //         const vestidosData = await fetchVestidos(token);
-    //         setVestidos(vestidosData);
-    //         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    //     } catch (error) {
-    //         toast.error('Erro ao carregar vestidos.');
-    //         setVestidos([]);
-    //     }
-    // };
+        try {
+            const clientData = await fetchClient(token);
+            setClients(clientData);
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        } catch (error) {
+            toast.error('Erro ao carregar clientes.');
+            setClients([]);
+        }
+    };
 
-    // useEffect(() => {
-    //     loadVestidos();
-    // }, []);
+    useEffect(() => {
+        loadClients();
+    }, []);
 
-    // const addVestido = (novoVestido: Dress) => {
-    //     setVestidos((prevVestidos) => [...prevVestidos, novoVestido]);
-    // };
+    const addClient = (newClient: Client) => {
+        const clientWithId: Client = {
+            ...newClient,
+            id: Date.now(),
+        };
+        setClients((prevClients) => [...prevClients, clientWithId]);
+        toast.success('Cliente adicionado com sucesso!');
+    };
 
-    // const updateVestido = (updatedVestido: Dress) => {
-    //     setVestidos((prevVestidos) =>
-    //         prevVestidos.map((vestido) =>
-    //             vestido.id === updatedVestido.id ? updatedVestido : vestido
-    //         )
-    //     );
-    // };
+    const updateClient = (updatedClient: Client) => {
+        setClients((prevClients) =>
+            prevClients.map((client) =>
+                client.id === updatedClient.id ? updatedClient : client
+            )
+        );
+    };
 
-    // const handleEditVestido = (vestido: Dress) => {
-    //     setSelectedVestido(vestido);
-    //     togglePopup();
-    // };
+    const handleEditClient = (client: Client) => {
+        setSelectedClient(client);
+        togglePopup();
+    };
 
-    // const removeVestido = async (id: number) => {
-    //     try {
-    //         await deleteVestido(id);
-    //         setVestidos((prevVestidos) => prevVestidos.filter((vestido) => vestido.id !== id));
-    //         toast.success('Vestido removido com sucesso!');
-    //         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    //     } catch (error) {
-    //         toast.error('Erro ao remover vestido.');
-    //     }
-    // };
-
-    // const filteredVestidos = vestidos.filter(vestido =>
-    //     vestido.title.toLowerCase().includes(searchTerm.toLowerCase())
-    // );
-
-    // const vestidosOrdenados = searchTerm
-    //     ? [...filteredVestidos, ...vestidos.filter(vestido => !vestido.title.toLowerCase().includes(searchTerm.toLowerCase()))]
-    //     : vestidos;
+    const filteredClients = clients.filter(client =>
+        client.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <Container>
             <ContainerContent>
                 <ContainerLeft>
-                    {/* {vestidosOrdenados.map((vestido) => (
-                            <InformationData
-                                key={vestido.id}
-                                vestido={vestido}
-                                togglePopup={togglePopup}
-                                onDelete={removeVestido}
-                                onEdit={() => handleEditVestido(vestido)}
-                            />
-                        ))} */}
+                    {filteredClients.map((client) => (
+                        <InformationData
+                            key={client.id}
+                            client={client}
+                            togglePopup={togglePopup}
+                            onEdit={() => handleEditClient(client)}
+                        />
+                    ))}
                 </ContainerLeft>
                 <ContainerRight>
-
                     <Search
-                        placeholder="Procure por vestidos..."
+                        placeholder="Procure por clientes..."
                         type="text"
-                    // onChange={(e) => setSearchTerm(e.target.value)}
+                        onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    <ButtonSearch >
-                        {/* onClick={() => togglePopup('add')} */}
-                        Adicionar Vestido
+                    <ButtonSearch onClick={() => togglePopup('addClient')}>
+                        Adicionar Cliente
                     </ButtonSearch>
                 </ContainerRight>
             </ContainerContent>
 
-            {/* {isPopupOpen && (
-                    <>
-                        <DressPopup addVestido={addVestido} />
-                        {selectedVestido && (
-                            <DressPopupEdit
-                                vestido={selectedVestido}
-                                onUpdate={updateVestido}
-                                onClose={() => {
-                                    setSelectedVestido(null);
-                                    togglePopup();
-                                }}
-                            />
-                        )}
-                    </>
-                )} */}
+            {isPopupOpen && (
+                <>
+                    <ClientPopup addClient={addClient} />
+                    {selectedClient && (
+                        <ClientPopupEdit
+                            client={selectedClient}
+                            onUpdate={updateClient}
+                            onClose={() => {
+                                setSelectedClient(null);
+                                togglePopup();
+                            }}
+                        />
+                    )}
+                </>
+            )}
 
-            {/* <ToastContainer /> */}
+            <ToastContainer />
         </Container>
     );
 }

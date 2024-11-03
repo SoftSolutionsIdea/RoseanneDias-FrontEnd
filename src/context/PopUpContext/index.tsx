@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 
-type PopupType = 'add' | 'edit' | null;
+type PopupType = 'add' | 'edit' | "addClient" | "editClient" | null;
 
 interface PopupContextType {
     isPopupOpen: boolean;
