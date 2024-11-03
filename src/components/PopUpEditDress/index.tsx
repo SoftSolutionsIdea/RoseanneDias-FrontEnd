@@ -2,7 +2,7 @@ import { PopupContainer, PopupContent, Input, Label, ErrorMessage, AjustButton, 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UpdatePopUp } from '../../service/EditPopUpService';
+import { UpdatePopUp } from '../../service/Dress/EditPopUpDressService';
 import { toast } from 'react-toastify';
 import { Dress } from '../../pages/Stock/dressType';
 

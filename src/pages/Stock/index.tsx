@@ -2,14 +2,14 @@ import { Container, ContainerContent, ContainerLeft, ContainerRight } from './st
 import ButtonSearch from '../../components/ButtonSearch';
 import Search from '../../components/Search';
 import { usePopup } from "../../context/PopUpContext";
-import DressPopup from '../../components/PopUpAdd';
+import DressPopup from '../../components/PopUpAddDress';
 import InformationData from "../../components/Dress";
 import { useState, useEffect } from 'react';
 import { Dress } from "./dressType";
 import { toast, ToastContainer } from 'react-toastify';
-import { deleteVestido } from "../../service/DeletePopUpService";
-import { fetchVestidos } from "../../service/ListPopUpService";
-import DressPopupEdit from '../../components/PopUpEdit';
+import { deleteVestido } from "../../service/Dress/DeletePopUpDressService";
+import { fetchVestidos } from "../../service/Dress/ListPopUpDressService";
+import DressPopupEdit from '../../components/PopUpEditDress';
 
 export default function Stock() {
     const { togglePopup, isPopupOpen } = usePopup();

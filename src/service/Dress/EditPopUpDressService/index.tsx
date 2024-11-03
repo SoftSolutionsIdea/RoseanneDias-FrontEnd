@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Dress } from "../../pages/Stock/dressType";
+import { Dress } from "../../../pages/Stock/dressType";
 
 const API_URL = "https://roseanne-dias-aluguel.onrender.com/stock";
 

@@ -3,7 +3,7 @@ import { usePopup } from "../../context/PopUpContext";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CreatePopUp } from '../../service/CreatePopUpService';
+import { CreatePopUp } from '../../service/Dress/CreatePopUpDressService';
 import { toast } from 'react-toastify';
 import { Dress } from '../../pages/Stock/dressType';
 
